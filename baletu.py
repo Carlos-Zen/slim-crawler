@@ -13,6 +13,7 @@ proxy = get_proxies()
 
 class SpiderMogo(Spider):
     base_url = 'http://sh.baletu.com/zhaofang/'
+    debug = True
 
     def crawl_url(self):
         urls = []
@@ -27,6 +28,8 @@ class SpiderMogo(Spider):
     def crawl(self,html_doc):
         disposals = []
         info = SerializeBlt(html_doc).get()
+        if self.debug:
+            print(info)
         with open('data/result.txt', 'a') as f:
             f.write(info.json() + '\n')
 

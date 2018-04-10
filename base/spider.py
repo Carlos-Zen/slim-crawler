@@ -36,6 +36,8 @@ class Spider(object):
             basic_item = BeautifulSoup(html, 'lxml')
             self.crawl(basic_item)
             time.sleep(random.random())
+            if self.debug:
+                break
 
     def crawl(self,url):
         """Need to be implemented by son classes.
