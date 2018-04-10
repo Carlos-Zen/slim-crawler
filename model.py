@@ -51,3 +51,4 @@ class House(Model):
 	pictures = []
 	source_from = ''
 	publisher = ''
+	traffic = ''

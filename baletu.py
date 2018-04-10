@@ -21,7 +21,7 @@ class SpiderMogo(Spider):
             'li', {'class': 'PBA_list_house'})
         for item in item_list:
             urls.append(''.join([self.base_url,item.find('a').get('href')]))
-        print(urls)
+        #print(urls)
         return urls
 
     def crawl(self,html_doc):

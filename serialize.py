@@ -7,7 +7,16 @@ from model import House
 class SerializeBlt(Serialize):
 	model = House
 
-	def getattr_nameloc(self):
+	def getattr_basic(self):
+		self.data['title'] = self.dom.find('div',{'class':'basic-title'}).find('a').get_text()
+		self.data['apartment'] = self.data['title']
+		self.data['rental'] = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'price'}).get_text()
+		self.data['room_area'] = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'cent'}).get_text()
+		self.data['orientation'] = self.dom.find('div',{'class':'house-text-Akey'}).find_all('li')[2].get_text()
+
+	def getattr_around(self):
+		dls = self.dom.find('div',{'class':'house-text-list'}).find_all('dl')
+		self['']
 	    info_1 = re.search(r'(\{\"name.*?\})',self.dom.html.head.script.get_text())
 	    info_1_josn = json.loads(info_1.group(0))
 	    self.data['name'] = info_1_josn['name']
