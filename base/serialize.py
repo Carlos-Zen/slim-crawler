@@ -10,13 +10,17 @@ class Serialize:
 		self.dom = bsdom
 		self.data = self.model()
 
+	def init(self):
+		pass
+
 	def get(self):
+		self.init()
 		callfuncs = self.__get_methods()
 		for func in callfuncs:
-			try:
-				func()
-			except Exception as e:
-				print(e)
+			# try:
+			func()
+			# except Exception as e:
+				# print(e)
 		
 		return self.data
 

@@ -15,8 +15,13 @@ class Model:
 		else:
 			pass
 
+	def _create_uniqe_key(self):
+		pass
+
 	def __str__(self):
+		self._create_uniqe_key()
 		return str(self.__dict__.items())
 
 	def json(self):
+		self._create_uniqe_key()
 		return json.dumps(self.__dict__)

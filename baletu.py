@@ -21,8 +21,7 @@ class SpiderMogo(Spider):
         item_list = BeautifulSoup(html, 'lxml').find_all(
             'li', {'class': 'PBA_list_house'})
         for item in item_list:
-            urls.append(''.join([self.base_url,item.find('a').get('href')]))
-        #print(urls)
+            urls.append(''.join(['',item.find('a').get('href')]))
         return urls
 
     def crawl(self,html_doc):

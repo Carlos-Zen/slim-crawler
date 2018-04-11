@@ -3,6 +3,7 @@
 import json
 import re
 from base.model import Model
+from base.common import *
 
 CONFIG = {
 	'wardrobe':'wardrobe',
@@ -30,8 +31,8 @@ class House(Model):
 	lati = ''
 	longi =''
 	apartment = ''
-	rent_type = 0 #整租/合租/公寓
-	bedroom_type = 1 #主卧：1，次卧：2
+	rent_type = 0 # 1整租/ 2合租/ 3公寓
+	bedroom_type = 1 # 主卧：1，次卧：2
 	room_num = 0
 	hall_num = 0
 	bathroom_num = 0
@@ -52,3 +53,8 @@ class House(Model):
 	source_from = ''
 	publisher = ''
 	traffic = ''
+	uniqe_key = ''
+
+	def _create_uniqe_key(self):
+		uniqe_string = ''.join((self.city,self.district,str(self.rent_type),self.address,self.room_area,self.house_area,str(self.floor),self.building_floor))	
+		self.uniqe_key = md5(uniqe_string)

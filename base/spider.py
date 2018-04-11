@@ -6,7 +6,7 @@ import random
 import requests
 from proxy import *
 from bs4 import BeautifulSoup
-
+from base.log import log
 class Spider(object):
     """ The spider base class
     """
@@ -31,8 +31,11 @@ class Spider(object):
     def _crawl_queue(self):
         while not self.url_queue.empty():
             url = self.url_queue.get()
-            html = requests.get(url, headers=headers,#proxies=proxies,
-                                    timeout=5).text
+            log('Crapy: '+url)
+            resp = requests.get(url, headers=headers,#proxies=proxies,
+                                    timeout=5)
+            resp.encoding = 'utf-8'
+            html = resp.text
             basic_item = BeautifulSoup(html, 'lxml')
             self.crawl(basic_item)
             time.sleep(random.random())
