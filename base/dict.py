@@ -1,6 +1,23 @@
 #coding:utf-8
 #
 
+DICT = {
+	'baletu':{
+		'config':{
+			'wardrobe':'衣橱',
+			'sofa':'沙发',
+			'tv':'电视',
+			'fridge':'冰箱',
+			'aircondition':'空调',
+			'waterheater':'热水器',
+			'network':'无线网络',
+			'microwave':'微波炉',
+			'kitchen':'厨房',
+			'bathroom':'卫生间',
+		}
+	}
+}
+
 FIELD_DICT = {
 	'rent_type':{
 		1:'整租',
@@ -48,6 +65,23 @@ def k2v(hash_name,k):
 	'''
 	hash = FIELD_DICT[hash_name]
 	return hash.get(k,0)
+
+def dv2k(dict_name,hash_name,v):
+	'''
+	value转key
+	'''
+	hash = DICT[dict_name][hash_name]
+	for key,value in hash.items():
+		if value == v:
+			return key
+	return v
+
+def dk2v(dict_name,hash_name,k):
+	'''
+	key转value
+	'''
+	hash = DICT[dict_name][hash_name]
+	return hash.get(k,k)
 
 def chinese_to_arabic(cn:str) -> int:
     unit = 0   # current

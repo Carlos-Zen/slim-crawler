@@ -2,6 +2,7 @@
  
 import json
 import re
+from setting import DEBUG
 
 class Serialize:
 	dom = None
@@ -17,11 +18,7 @@ class Serialize:
 		self.init()
 		callfuncs = self.__get_methods()
 		for func in callfuncs:
-			# try:
 			func()
-			# except Exception as e:
-				# print(e)
-		
 		return self.data
 
 	def __get_methods(self):

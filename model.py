@@ -54,7 +54,9 @@ class House(Model):
 	publisher = ''
 	traffic = ''
 	uniqe_key = ''
+	private_falicities = []
+	public_falicities = []
 
 	def _create_uniqe_key(self):
-		uniqe_string = ''.join((self.city,self.district,str(self.rent_type),self.address,self.room_area,self.house_area,str(self.floor),self.building_floor))	
+		uniqe_string = ''.join((self.city,self.district,str(self.rent_type),self.address,str(self.room_area),str(self.house_area),str(self.floor),str(self.building_floor)))	
 		self.uniqe_key = md5(uniqe_string)

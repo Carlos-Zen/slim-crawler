@@ -1,11 +1,13 @@
 # coding:utf-8
 import re
-from base.log import log
+from base.log import *
 
 '''
 巴乐兔，字符串处理，解析数据
 '''
 REG = {
+	'number':r'(\d+)',
+	'yuan':r'(\d+)元',
 	'huxing':r'(\d)室(\d)厅(\d)卫',
 	'floor':r'(\d+)层.*(\d+)层',
 	'rent_type':r'(.+?租).*(.+?卧)',
@@ -14,6 +16,14 @@ REG = {
 	'longi':r'.*var\s+s_lon\s?=\s?\'(-?\d+\.\d+)\';',
 	'lati':r'.*var\s+s_lat\s?=\s?\'(-?\d+\.\d+)\';',
 }
+
+def splitNumber(string):
+	matched = re.search(REG['yuan'],string)
+	return matched.group(1)	
+
+def splitYuan(string):
+	matched = re.search(REG['number'],string)
+	return matched.group(1)
 
 def splitHuxing(string):
 	matched = re.match(REG['huxing'],string)

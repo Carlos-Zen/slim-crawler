@@ -3,8 +3,9 @@ import redis
 headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate",
-    "Accept-Language": "en-US,en;q=0.5",
-    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0"}
+    "Accept-Language": "en,zh-CN;q=0.9,zh;q=0.8",
+    "Connection": "keep-alive",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"}
 
 key = "useful_proxy"
 host = "10.18.98.134"

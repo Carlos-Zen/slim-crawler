@@ -6,6 +6,8 @@ from base.serialize import Serialize
 from model import House
 from base.utils import *
 from base.dict import *
+
+
 class SerializeBlt(Serialize):
 	model = House
 
@@ -15,8 +17,10 @@ class SerializeBlt(Serialize):
 	def getattr_basic(self):
 		self.data['title'] = self.dom.find('div',{'class':'basic-title'}).find('a').get_text()
 		self.data['apartment'] = self.data['title']
-		self.data['rental'] = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'price'}).get_text()
-		self.data['room_area'] = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'cent'}).get_text()
+		rental = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'price'}).get_text()
+		self.data['rental'] = splitYuan(rental)
+		room_area = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'cent'}).get_text()
+		self.data['room_area'] = splitYuan(room_area)
 		self.data['orientation'] = self.dom.find('div',{'class':'house-text-Akey'}).find_all('li')[2].get_text()
 
 	def getattr_around(self):
@@ -34,13 +38,19 @@ class SerializeBlt(Serialize):
 		self.data['address'] = dds[6].get_text()
 
 	def getattr_pictures(self):
-		pictures_dom = self.dom.find('div',{'class':'i-images'}).find_all('img')
-		self.data['pictures'] = [pdom.get('src') for pdom in pictures_dom]
+		pictures_dom = self.dom.select('div.imagesPreviewer .i-images img')
+		self.data['pictures'] = [pdom.get('data-src') for pdom in pictures_dom]
 
 	def getattr_longlat(self):
 		html = str(self.dom)
 		self.data['longi'] = splitLongi(html)
 		self.data['lati'] = splitLati(html) 
+
+	def getattr_falicities(self):
+		pri_fal_doms = self.dom.select('div#privateFalicities li img')
+		pub_fal_doms = self.dom.select('div#publicFalicities li img')
+		self.data['private_falicities'] = [dv2k('baletu','config',fdom.get('alt')) for fdom in pri_fal_doms]
+		self.data['public_falicities'] = [dv2k('baletu','config',fdom.get('alt')) for fdom in pub_fal_doms]
 
 class Serialize58(Serialize):
 	model = House
