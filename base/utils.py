@@ -53,3 +53,10 @@ def splitLongi(string):
 def splitLati(string):
 	matched = re.search(REG['lati'],string)
 	return matched.group(1)	
+
+def trim(string):
+	'''
+	remove \n,space
+	'''	
+	string = string.replace("\n", '').replace(' ','')
+	return string

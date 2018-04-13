@@ -22,6 +22,7 @@ class SerializeBlt(Serialize):
 		room_area = self.dom.find('div',{'class':'house-text-Akey'}).find('li',{'class':'cent'}).get_text()
 		self.data['room_area'] = splitYuan(room_area)
 		self.data['orientation'] = self.dom.find('div',{'class':'house-text-Akey'}).find_all('li')[2].get_text()
+		self.data['city'] = trim(self.dom.select('div.region a')[0].get_text())
 
 	def getattr_around(self):
 		dds = self.dom.find('div',{'class':'house-text-list'}).find_all('dd')
